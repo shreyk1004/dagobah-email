@@ -29,6 +29,7 @@ def extract_main_text_and_attachments(raw_email):
 def summarize_main_text_with_gemini(main_text):
     # Only import and initialize Gemini if this function is called
     from google import genai
+    from google.genai import types
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable not set.")
@@ -68,5 +69,6 @@ def summarize_main_text_with_gemini(main_text):
         Email text:
         {main_text}
         """
-    response = client.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt,
+                                              config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=0)))
     return response.text
