@@ -8,7 +8,7 @@ def version_2():
     output_lines = []
     output_lines.append("Fetching and processing the most recent message...")
     print("Fetching and processing the most recent message...")
-    raw = fetch_most_recgent_email()
+    raw = fetch_most_recent_email()
     if raw is None:
         print("No messages found.")
         return
