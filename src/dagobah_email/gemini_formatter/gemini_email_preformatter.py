@@ -69,6 +69,6 @@ def summarize_main_text_with_gemini(main_text):
         Email text:
         {main_text}
         """
-    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt,
+    response = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt,
                                               config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=0)))
     return response.text
