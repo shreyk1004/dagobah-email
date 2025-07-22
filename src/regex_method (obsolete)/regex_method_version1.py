@@ -7,7 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from src.main import SCOPES
+from main import SCOPES
 
 
 # --- Version 1 ---
@@ -48,7 +48,7 @@ def version_1():
         import base64
         raw = base64.urlsafe_b64decode(msg_data["raw"])
         # Process the single email as a Thread
-        from regex_method.email_preformatter import parse_thread_from_raw_email
+        from email_preformatter import parse_thread_from_raw_email
         thread = parse_thread_from_raw_email(raw)
 
         # testing purposes #########################################################

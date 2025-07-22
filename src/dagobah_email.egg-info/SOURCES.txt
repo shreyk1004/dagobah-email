@@ -1,0 +1,11 @@
+setup.py
+src/dagobah_email/__init__.py
+src/dagobah_email.egg-info/PKG-INFO
+src/dagobah_email.egg-info/SOURCES.txt
+src/dagobah_email.egg-info/dependency_links.txt
+src/dagobah_email.egg-info/top_level.txt
+src/dagobah_email/gemini_formatter/__init__.py
+src/dagobah_email/gemini_formatter/gemini_email_preformatter.py
+src/dagobah_email/gemini_formatter/version2.py
+src/dagobah_email/gmail_fetch/__init__.py
+src/dagobah_email/gmail_fetch/gmail_api_mail_fetch.py

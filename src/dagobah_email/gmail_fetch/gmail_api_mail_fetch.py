@@ -8,8 +8,6 @@ from googleapiclient.errors import HttpError
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
-
-
 # currently gets the most recent email from the user's inbox
 # TODO: activate upon new received email event
 
@@ -26,18 +24,22 @@ def fetch_most_recent_email():
                 "credentials.json", SCOPES
             )
             creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
         with open("token.json", "w") as token:
             token.write(creds.to_json())
     try:
         service = build("gmail", "v1", credentials=creds)
-        results = service.users().messages().list(userId="me", labelIds=["INBOX"], maxResults=1).execute()
+        results = (
+            service.users().messages().list(userId="me", maxResults=1, labelIds=["INBOX"]).execute()
+        )
         messages = results.get("messages", [])
         if not messages:
             return None
-        msg_id = messages[0]["id"]
-        msg_data = service.users().messages().get(userId="me", id=msg_id, format="raw").execute()
+        msg = (
+            service.users().messages().get(userId="me", id=messages[0]["id"], format="raw").execute()
+        )
         import base64
-        raw = base64.urlsafe_b64decode(msg_data["raw"])
+        raw = base64.urlsafe_b64decode(msg["raw"].encode("ASCII"))
         return raw
     except HttpError as error:
         print(f"An error occurred: {error}")
